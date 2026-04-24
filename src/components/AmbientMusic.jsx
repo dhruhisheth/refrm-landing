@@ -8,9 +8,18 @@ const TARGET_VOL = 0.55
 export default function AmbientMusic() {
   const [playing, setPlaying] = useState(false)
   const [tooltip, setTooltip] = useState(false)
+  const [showHint, setShowHint] = useState(false)
   const isMobile = useIsMobile()
   const audioRef = useRef(null)
   const fadeRef  = useRef(null)
+
+  useEffect(() => {
+    const show = setTimeout(() => setShowHint(true), 3500)
+    const hide = setTimeout(() => setShowHint(false), 11000)
+    return () => { clearTimeout(show); clearTimeout(hide) }
+  }, [])
+
+  useEffect(() => { if (playing) setShowHint(false) }, [playing])
 
   useEffect(() => {
     const audio = new Audio(TRACK_URL)
@@ -75,6 +84,59 @@ export default function AmbientMusic() {
 
   return (
     <div style={{ position: 'fixed', bottom: 28, ...(isMobile ? { left: 16 } : { right: 28 }), zIndex: 200 }}>
+
+      {/* Music hint popup */}
+      <AnimatePresence>
+        {showHint && !playing && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.95 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => { toggle(); setShowHint(false) }}
+            style={{
+              position: 'absolute',
+              bottom: 58,
+              ...(isMobile ? { left: 0 } : { right: 0 }),
+              background: 'linear-gradient(135deg, rgba(212,168,67,0.22), rgba(212,168,67,0.10))',
+              border: '1px solid rgba(212,168,67,0.45)',
+              backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
+              borderRadius: '14px',
+              padding: '10px 16px 10px 12px',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <motion.span
+                animate={{ scale: [1, 1.25, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ fontSize: '15px', lineHeight: 1 }}
+              >♪</motion.span>
+              <div>
+                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', color: 'rgba(212,168,67,0.95)', textTransform: 'uppercase' }}>
+                  Play Music
+                </div>
+                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '8.5px', color: 'rgba(210,195,175,0.6)', letterSpacing: '0.06em', marginTop: '2px' }}>
+                  Inspire · ASHUTOSH
+                </div>
+              </div>
+            </div>
+            {/* Arrow pointing down to button */}
+            <div style={{
+              position: 'absolute', bottom: -5,
+              ...(isMobile ? { left: 16 } : { right: 16 }),
+              width: 9, height: 9,
+              background: 'rgba(212,168,67,0.18)',
+              borderRight: '1px solid rgba(212,168,67,0.45)',
+              borderBottom: '1px solid rgba(212,168,67,0.45)',
+              transform: 'rotate(45deg)',
+            }} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {tooltip && (
           <motion.div

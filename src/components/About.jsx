@@ -160,56 +160,58 @@ export default function About() {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: containerRef })
   const sp = useSpring(scrollYProgress, { stiffness: 70, damping: 28, restDelta: 0.001 })
+  // Clamp all card animations to first 65% of scroll — leaves 35% (~150vh) where all 6 cards stay visible
+  const animSp = useTransform(animSp, [0, 0.65], [0, 1])
 
-  const titleOpacity = useTransform(sp, [0.0, 0.06, 0.18, 0.24], [0, 1, 1, 0])
-  const titleY = useTransform(sp, [0.0, 0.06, 0.24], [28, 0, -26])
-  const titleScale = useTransform(sp, [0.0, 0.06, 0.24], [0.97, 1, 0.98])
+  const titleOpacity = useTransform(animSp, [0.0, 0.06, 0.18, 0.24], [0, 1, 1, 0])
+  const titleY = useTransform(animSp, [0.0, 0.06, 0.24], [28, 0, -26])
+  const titleScale = useTransform(animSp, [0.0, 0.06, 0.24], [0.97, 1, 0.98])
 
-  const sceneOpacity = useTransform(sp, [0.20, 0.30], [0, 1])
-  const sceneY = useTransform(sp, [0.20, 0.30], [55, 0])
-  const sceneScale = useTransform(sp, [0.20, 0.30], [0.96, 1])
+  const sceneOpacity = useTransform(animSp, [0.20, 0.30], [0, 1])
+  const sceneY = useTransform(animSp, [0.20, 0.30], [55, 0])
+  const sceneScale = useTransform(animSp, [0.20, 0.30], [0.96, 1])
 
   // Deck placeholder
-  const deckOpacity = useTransform(sp, [0.24, 0.32, 0.42], [0, 0.45, 0])
-  const deckY = useTransform(sp, [0.24, 0.42], [120, 0])
-  const deckScale = useTransform(sp, [0.24, 0.42], [0.92, 1])
+  const deckOpacity = useTransform(animSp, [0.24, 0.32, 0.42], [0, 0.45, 0])
+  const deckY = useTransform(animSp, [0.24, 0.42], [120, 0])
+  const deckScale = useTransform(animSp, [0.24, 0.42], [0.92, 1])
 
   // 6 cards — 2 rows × 3 columns
-  const c0Op  = useTransform(sp, [0.26, 0.34], [0, 1])
-  const c0X   = useTransform(sp, [0.26, 0.43], [0, -368])
-  const c0Y   = useTransform(sp, [0.26, 0.43], [60, -82])
-  const c0R   = useTransform(sp, [0.26, 0.43], [0, -10])
-  const c0Sc  = useTransform(sp, [0.26, 0.43], [0.82, 1])
+  const c0Op  = useTransform(animSp, [0.26, 0.34], [0, 1])
+  const c0X   = useTransform(animSp, [0.26, 0.43], [0, -368])
+  const c0Y   = useTransform(animSp, [0.26, 0.43], [60, -82])
+  const c0R   = useTransform(animSp, [0.26, 0.43], [0, -10])
+  const c0Sc  = useTransform(animSp, [0.26, 0.43], [0.82, 1])
 
-  const c1Op  = useTransform(sp, [0.35, 0.43], [0, 1])
-  const c1X   = useTransform(sp, [0.35, 0.52], [0, 0])
-  const c1Y   = useTransform(sp, [0.35, 0.52], [60, -86])
-  const c1R   = useTransform(sp, [0.35, 0.52], [0, 2])
-  const c1Sc  = useTransform(sp, [0.35, 0.52], [0.82, 1])
+  const c1Op  = useTransform(animSp, [0.35, 0.43], [0, 1])
+  const c1X   = useTransform(animSp, [0.35, 0.52], [0, 0])
+  const c1Y   = useTransform(animSp, [0.35, 0.52], [60, -86])
+  const c1R   = useTransform(animSp, [0.35, 0.52], [0, 2])
+  const c1Sc  = useTransform(animSp, [0.35, 0.52], [0.82, 1])
 
-  const c2Op  = useTransform(sp, [0.44, 0.52], [0, 1])
-  const c2X   = useTransform(sp, [0.44, 0.61], [0, 368])
-  const c2Y   = useTransform(sp, [0.44, 0.61], [60, -80])
-  const c2R   = useTransform(sp, [0.44, 0.61], [0, 9])
-  const c2Sc  = useTransform(sp, [0.44, 0.61], [0.82, 1])
+  const c2Op  = useTransform(animSp, [0.44, 0.52], [0, 1])
+  const c2X   = useTransform(animSp, [0.44, 0.61], [0, 368])
+  const c2Y   = useTransform(animSp, [0.44, 0.61], [60, -80])
+  const c2R   = useTransform(animSp, [0.44, 0.61], [0, 9])
+  const c2Sc  = useTransform(animSp, [0.44, 0.61], [0.82, 1])
 
-  const c3Op  = useTransform(sp, [0.58, 0.66], [0, 1])
-  const c3X   = useTransform(sp, [0.58, 0.75], [0, -368])
-  const c3Y   = useTransform(sp, [0.58, 0.75], [60, 318])
-  const c3R   = useTransform(sp, [0.58, 0.75], [0, 8])
-  const c3Sc  = useTransform(sp, [0.58, 0.75], [0.82, 1])
+  const c3Op  = useTransform(animSp, [0.58, 0.66], [0, 1])
+  const c3X   = useTransform(animSp, [0.58, 0.75], [0, -368])
+  const c3Y   = useTransform(animSp, [0.58, 0.75], [60, 318])
+  const c3R   = useTransform(animSp, [0.58, 0.75], [0, 8])
+  const c3Sc  = useTransform(animSp, [0.58, 0.75], [0.82, 1])
 
-  const c4Op  = useTransform(sp, [0.67, 0.75], [0, 1])
-  const c4X   = useTransform(sp, [0.67, 0.84], [0, 0])
-  const c4Y   = useTransform(sp, [0.67, 0.84], [60, 322])
-  const c4R   = useTransform(sp, [0.67, 0.84], [0, -4])
-  const c4Sc  = useTransform(sp, [0.67, 0.84], [0.82, 1])
+  const c4Op  = useTransform(animSp, [0.67, 0.75], [0, 1])
+  const c4X   = useTransform(animSp, [0.67, 0.84], [0, 0])
+  const c4Y   = useTransform(animSp, [0.67, 0.84], [60, 322])
+  const c4R   = useTransform(animSp, [0.67, 0.84], [0, -4])
+  const c4Sc  = useTransform(animSp, [0.67, 0.84], [0.82, 1])
 
-  const c5Op  = useTransform(sp, [0.76, 0.84], [0, 1])
-  const c5X   = useTransform(sp, [0.76, 0.93], [0, 368])
-  const c5Y   = useTransform(sp, [0.76, 0.93], [60, 320])
-  const c5R   = useTransform(sp, [0.76, 0.93], [0, -11])
-  const c5Sc  = useTransform(sp, [0.76, 0.93], [0.82, 1])
+  const c5Op  = useTransform(animSp, [0.76, 0.84], [0, 1])
+  const c5X   = useTransform(animSp, [0.76, 0.93], [0, 368])
+  const c5Y   = useTransform(animSp, [0.76, 0.93], [60, 320])
+  const c5R   = useTransform(animSp, [0.76, 0.93], [0, -11])
+  const c5Sc  = useTransform(animSp, [0.76, 0.93], [0.82, 1])
 
   const cardMotion = [
     { x: c0X, y: c0Y, rotate: c0R, opacity: c0Op, scale: c0Sc },
@@ -223,7 +225,7 @@ export default function About() {
   if (isMobile) return <MobileAbout />
 
   return (
-    <div ref={containerRef} id="about" style={{ height: '430vh', position: 'relative', zIndex: 20 }}>
+    <div ref={containerRef} id="about" style={{ height: '530vh', position: 'relative', zIndex: 20 }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 20 }}>
 
         {/* Arch glow */}

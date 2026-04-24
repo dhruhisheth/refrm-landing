@@ -131,7 +131,7 @@ export default function HeroAria() {
   const { scrollYProgress } = useScroll({ target: containerRef })
   const sp = useSpring(scrollYProgress, { stiffness: 80, damping: 28, restDelta: 0.001 })
 
-  // Container is 500vh → 400vh of actual scroll distance
+  // Container is 440vh → 340vh of actual scroll distance
   // Section 1 clears by 12% (48vh), Section 2 dwells 28%→82% = 216vh
   const heroOpacity = useTransform(sp, [0, 0.12], [1, 0])
   const heroY       = useTransform(sp, [0, 0.12], [0, -70])
@@ -224,7 +224,7 @@ export default function HeroAria() {
   }
 
   return (
-    <div ref={containerRef} id="hero-aria" style={{ height: '500vh' }}>
+    <div ref={containerRef} id="hero-aria" style={{ height: '440vh' }}>
       <div
         onMouseMove={handleMouseMove}
         style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}
