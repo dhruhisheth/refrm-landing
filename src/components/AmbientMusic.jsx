@@ -1,5 +1,6 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 // Am7 chord (A C E G) across octaves — sophisticated, warm, luxurious
 const LAYERS = [
@@ -79,6 +80,7 @@ function buildGraph(ctx) {
 export default function AmbientMusic() {
   const [playing, setPlaying]   = useState(false)
   const [tooltip, setTooltip]   = useState(false)
+  const isMobile = useIsMobile()
   const ctxRef    = useRef(null)
   const masterRef = useRef(null)
   const nodesRef  = useRef([])
@@ -129,7 +131,7 @@ export default function AmbientMusic() {
   }, [])
 
   return (
-    <div style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 200 }}>
+    <div style={{ position: 'fixed', bottom: 28, ...(isMobile ? { left: 16 } : { right: 28 }), zIndex: 200 }}>
       <AnimatePresence>
         {tooltip && (
           <motion.div
@@ -138,7 +140,7 @@ export default function AmbientMusic() {
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.18 }}
             style={{
-              position: 'absolute', bottom: 54, right: 0,
+              position: 'absolute', bottom: 54, ...(isMobile ? { left: 0 } : { right: 0 }),
               background: 'rgba(6,6,12,0.95)',
               border: '1px solid rgba(212,168,67,0.22)',
               backdropFilter: 'blur(16px)',
