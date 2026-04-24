@@ -521,8 +521,8 @@ export default function HeroAria() {
                   }}
                   transition={{ duration: 0.35 }}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: '10px',
-                    padding: '16px 20px',
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    padding: isMobile ? '12px 14px' : '16px 20px',
                     background: 'linear-gradient(180deg, rgba(10,12,20,0.86), rgba(18,20,30,0.74))',
                     border: '1px solid rgba(212,168,67,0.26)',
                     borderRadius: '28px',
@@ -532,7 +532,7 @@ export default function HeroAria() {
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,67,0.55)" strokeWidth="1.8" style={{ flexShrink: 0 }}>
                     <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
                   </svg>
-                  <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center' }}>
+                  <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', overflow: 'hidden', minWidth: 0 }}>
                     <input
                       type="text"
                       value={input}
@@ -568,18 +568,18 @@ export default function HeroAria() {
                     transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
                     style={{
                       background: 'rgba(212,168,67,0.15)', border: '1px solid rgba(212,168,67,0.3)',
-                      color: 'rgba(212,168,67,0.9)', padding: '9px 18px',
-                      fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 600,
-                      letterSpacing: '0.14em', textTransform: 'uppercase',
-                      cursor: 'pointer', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px',
+                      color: 'rgba(212,168,67,0.9)', padding: isMobile ? '8px 12px' : '9px 18px',
+                      fontFamily: 'Inter, sans-serif', fontSize: isMobile ? '11px' : '10px', fontWeight: 600,
+                      letterSpacing: isMobile ? '0' : '0.14em', textTransform: 'uppercase',
+                      cursor: 'pointer', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '4px',
                     }}
                     whileHover={{ background: 'rgba(212,168,67,0.28)', color: '#f0dfa0', scale: 1.04 }}
                     whileTap={{ scale: 0.95 }}>
-                    Ask ARIA
+                    {isMobile ? null : 'Ask ARIA'}
                     <motion.span
                       animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-                      style={{ fontSize: '11px' }}>→</motion.span>
+                      style={{ fontSize: '13px' }}>→</motion.span>
                   </motion.button>
                 </motion.div>
 
@@ -587,7 +587,7 @@ export default function HeroAria() {
                   {suggestions.slice(0, 4).map((s, i) => (
                     <motion.button key={i} onClick={() => setInput(s)}
                       style={{
-                        padding: '12px 16px', fontFamily: 'Inter, sans-serif', fontSize: '12px',
+                        padding: isMobile ? '10px 12px' : '12px 16px', fontFamily: 'Inter, sans-serif', fontSize: isMobile ? '11px' : '12px',
                         background: 'rgba(10,12,18,0.72)', border: '1px solid rgba(212,168,67,0.20)',
                         color: 'rgba(230,219,201,0.82)', cursor: 'pointer', letterSpacing: '0.01em',
                         borderRadius: '18px',
