@@ -20,37 +20,34 @@ export default function AmbientMusic() {
     audioRef.current = audio
 
     const fadeIn = () => {
+      audio.volume = 0
+      audio.muted = false
       let v = 0
       const id = setInterval(() => {
-        v = Math.min(TARGET_VOL, v + 0.025)
+        v = Math.min(TARGET_VOL, v + 0.018)
         audio.volume = v
         if (v >= TARGET_VOL) clearInterval(id)
-      }, 35)
+      }, 40)
     }
 
-    const tryPlay = () => {
-      if (!audio.paused) return
-      audio.play()
-        .then(() => { setPlaying(true); fadeIn() })
-        .catch(() => {})
-    }
-
-    // Try autoplay immediately
-    tryPlay()
-
-    // Fallback: start on first user gesture if autoplay is blocked
-    const onGesture = () => {
-      tryPlay()
-      document.removeEventListener('click', onGesture)
-      document.removeEventListener('touchstart', onGesture)
-    }
-    document.addEventListener('click', onGesture)
-    document.addEventListener('touchstart', onGesture)
+    // Muted autoplay is always allowed by browsers — unmute after play starts
+    audio.muted = true
+    audio.play()
+      .then(() => { fadeIn(); setPlaying(true) })
+      .catch(() => {
+        // Last resort fallback for very restrictive environments
+        const onGesture = () => {
+          audio.muted = false
+          audio.play().then(() => { fadeIn(); setPlaying(true) }).catch(() => {})
+          document.removeEventListener('click', onGesture)
+          document.removeEventListener('touchstart', onGesture)
+        }
+        document.addEventListener('click', onGesture)
+        document.addEventListener('touchstart', onGesture)
+      })
 
     return () => {
       if (fadeRef.current) clearInterval(fadeRef.current)
-      document.removeEventListener('click', onGesture)
-      document.removeEventListener('touchstart', onGesture)
       audio.pause()
       audio.src = ''
     }
