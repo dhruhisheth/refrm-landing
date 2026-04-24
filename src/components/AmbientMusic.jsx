@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
@@ -86,44 +86,46 @@ export default function AmbientMusic() {
   const nodesRef  = useRef([])
   const timerRef  = useRef(null)
 
-  const ensureInit = useCallback(() => {
-    if (ctxRef.current) return
-    const ctx = new (window.AudioContext || window.webkitAudioContext)()
-    const { master, all } = buildGraph(ctx)
-    ctxRef.current = ctx
-    masterRef.current = master
-    nodesRef.current = all
-  }, [])
+  const toggle = () => {
+    if (playing) {
+      // Mute
+      if (!masterRef.current || !ctxRef.current) { setPlaying(false); return }
+      const ctx = ctxRef.current
+      const m   = masterRef.current
+      m.gain.cancelScheduledValues(ctx.currentTime)
+      m.gain.setTargetAtTime(0, ctx.currentTime, 0.5)
+      if (timerRef.current) clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => {
+        if (ctx.state === 'running') ctx.suspend()
+      }, 2200)
+      setPlaying(false)
+      return
+    }
 
-  const play = useCallback(async () => {
-    ensureInit()
-    if (timerRef.current) clearTimeout(timerRef.current)
-    const ctx = ctxRef.current
-    if (ctx.state === 'suspended') await ctx.resume()
-    const m = masterRef.current
-    m.gain.cancelScheduledValues(ctx.currentTime)
-    // Smooth fade-in using exponential approach (time constant 2s)
-    m.gain.setTargetAtTime(0.22, ctx.currentTime, 2.0)
-    setPlaying(true)
-  }, [ensureInit])
+    // Play — everything synchronous so iOS Safari honours the gesture
+    try {
+      if (!ctxRef.current) {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)()
+        const { master, all } = buildGraph(ctx)
+        ctxRef.current = ctx
+        masterRef.current = master
+        nodesRef.current = all
+      }
 
-  const mute = useCallback(() => {
-    if (!masterRef.current || !ctxRef.current) { setPlaying(false); return }
-    const ctx = ctxRef.current
-    const m   = masterRef.current
-    m.gain.cancelScheduledValues(ctx.currentTime)
-    // Fast fade-out (time constant 0.5s ≈ silent in ~1.5s)
-    m.gain.setTargetAtTime(0, ctx.currentTime, 0.5)
-    // Suspend context after fade to save CPU
-    timerRef.current = setTimeout(() => {
-      if (ctx.state === 'running') ctx.suspend()
-    }, 2200)
-    setPlaying(false)
-  }, [])
+      const ctx = ctxRef.current
+      const m   = masterRef.current
 
-  const toggle = useCallback(() => {
-    playing ? mute() : play()
-  }, [playing, mute, play])
+      // resume() called synchronously within the gesture (required by iOS Safari)
+      ctx.resume()
+
+      if (timerRef.current) clearTimeout(timerRef.current)
+      m.gain.cancelScheduledValues(ctx.currentTime)
+      m.gain.setTargetAtTime(0.22, ctx.currentTime, 1.5)
+      setPlaying(true)
+    } catch (e) {
+      console.warn('Web Audio error:', e)
+    }
+  }
 
   useEffect(() => () => {
     if (timerRef.current) clearTimeout(timerRef.current)
