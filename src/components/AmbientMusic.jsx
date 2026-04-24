@@ -19,31 +19,21 @@ export default function AmbientMusic() {
     audio.preload = 'auto'
     audioRef.current = audio
 
-    const fadeIn = () => {
-      audio.volume = 0
-      audio.muted = false
-      let v = 0
-      const id = setInterval(() => {
-        v = Math.min(TARGET_VOL, v + 0.018)
-        audio.volume = v
-        if (v >= TARGET_VOL) clearInterval(id)
-      }, 40)
-    }
-
-    // Muted autoplay is always allowed by browsers — unmute after play starts
-    audio.muted = true
+    // Try real (unmuted) autoplay first — works in some browsers
+    audio.volume = 0
     audio.play()
-      .then(() => { fadeIn(); setPlaying(true) })
+      .then(() => {
+        setPlaying(true)
+        let v = 0
+        const id = setInterval(() => {
+          v = Math.min(TARGET_VOL, v + 0.018)
+          audio.volume = v
+          if (v >= TARGET_VOL) clearInterval(id)
+        }, 40)
+      })
       .catch(() => {
-        // Last resort fallback for very restrictive environments
-        const onGesture = () => {
-          audio.muted = false
-          audio.play().then(() => { fadeIn(); setPlaying(true) }).catch(() => {})
-          document.removeEventListener('click', onGesture)
-          document.removeEventListener('touchstart', onGesture)
-        }
-        document.addEventListener('click', onGesture)
-        document.addEventListener('touchstart', onGesture)
+        // Autoplay blocked — button pulses to invite the first click
+        // Music will start on the user's first interaction with the button
       })
 
     return () => {
@@ -117,12 +107,12 @@ export default function AmbientMusic() {
         whileTap={{ scale: 0.9 }}
         animate={playing
           ? { boxShadow: ['0 0 0px rgba(212,168,67,0)', '0 0 24px rgba(212,168,67,0.48)', '0 0 0px rgba(212,168,67,0)'] }
-          : { boxShadow: '0 2px 14px rgba(0,0,0,0.45)' }}
-        transition={playing ? { duration: 2.6, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.3 }}
+          : { boxShadow: ['0 0 0px rgba(200,185,165,0)', '0 0 12px rgba(200,185,165,0.22)', '0 0 0px rgba(200,185,165,0)'] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           width: 46, height: 46, borderRadius: '50%',
           background: playing ? 'rgba(212,168,67,0.14)' : 'rgba(10,10,18,0.86)',
-          border: `1px solid ${playing ? 'rgba(212,168,67,0.5)' : 'rgba(200,185,165,0.2)'}`,
+          border: `1px solid ${playing ? 'rgba(212,168,67,0.5)' : 'rgba(200,185,165,0.28)'}`,
           backdropFilter: 'blur(16px)',
           cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
