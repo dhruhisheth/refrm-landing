@@ -472,8 +472,8 @@ export default function HeroAria() {
         ══════════════════════════════════════════════════════ */}
         <motion.div id="meet-aria" style={{
           position: 'absolute', inset: 0, zIndex: 24,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          paddingTop: 'clamp(40px, 6vh, 80px)',
+          display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center',
+          paddingTop: isMobile ? '72px' : 'clamp(40px, 6vh, 80px)',
           pointerEvents: 'none',
           filter: exitFilter,
         }}>
@@ -643,7 +643,7 @@ export default function HeroAria() {
                       style={{
                         position: 'relative',
                         zIndex: 1,
-                        height: isMobile ? 'clamp(160px, 28vh, 260px)' : 'clamp(280px, 38vh, 380px)',
+                        height: isMobile ? 'clamp(130px, 20vh, 200px)' : 'clamp(280px, 38vh, 380px)',
                         width: 'auto', objectFit: 'contain', display: 'block',
                         filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
                       }}
@@ -653,7 +653,7 @@ export default function HeroAria() {
               </motion.div>
             </div>
 
-            <div style={{ width: '100%', marginTop: '18px', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', marginTop: '18px', display: isMobile ? 'none' : 'flex', justifyContent: 'center' }}>
               <div style={{ width: 'min(100%, 840px)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
                 {[
                   { value: '10+', label: 'discovery feeds' },

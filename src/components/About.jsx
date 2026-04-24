@@ -1,5 +1,68 @@
 import React, { useRef } from 'react'
-import { motion, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion'
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useInView } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
+
+function MobileCard({ card, index }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        background: 'rgba(255,252,245,0.07)',
+        border: '1px solid rgba(232,218,196,0.13)',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        padding: '20px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div style={{ position: 'absolute', top: 0, right: 0, width: '50%', height: '35%', background: 'linear-gradient(220deg, rgba(232,218,196,0.05) 0%, transparent 65%)', pointerEvents: 'none' }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '7.5px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(232,218,196,0.78)' }}>{card.tag}</span>
+        <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '10px', color: 'rgba(232,218,196,0.26)' }}>{card.num}</span>
+      </div>
+      <div style={{ height: 1, background: 'linear-gradient(to right, rgba(232,218,196,0.13), transparent)', marginBottom: '14px' }} />
+      <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '20px', fontWeight: 400, color: '#f0e8d8', lineHeight: 1.22, letterSpacing: '-0.015em', margin: '0 0 6px 0', whiteSpace: 'pre-line' }}>{card.headline}</h3>
+      <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '11.5px', fontStyle: 'italic', color: 'rgba(232,218,196,0.78)', opacity: 0.88 }}>{card.sub}</span>
+      <div style={{ height: 1, background: 'rgba(232,218,196,0.1)', margin: '12px 0' }} />
+      <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', fontWeight: 400, color: 'rgba(215,200,175,0.65)', lineHeight: 1.72, margin: 0 }}>{card.body}</p>
+      <div style={{ marginTop: '12px', height: '1.5px', borderRadius: '2px', background: 'linear-gradient(90deg, rgba(232,218,196,0.26), transparent)' }} />
+    </motion.div>
+  )
+}
+
+function MobileAbout() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  return (
+    <div id="about" style={{ position: 'relative', zIndex: 20, padding: '80px 24px' }}>
+      <motion.div
+        ref={ref}
+        style={{ textAlign: 'center', marginBottom: '40px' }}
+        initial={{ opacity: 0, y: 24 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7 }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+          <div style={{ height: 1, width: 36, background: 'rgba(212,168,67,0.28)' }} />
+          <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(212,168,67,0.55)' }} />
+          <div style={{ height: 1, width: 36, background: 'rgba(212,168,67,0.28)' }} />
+        </div>
+        <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 400, color: '#f2ebe0', lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0, textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}>
+          The Story of REFRM
+        </h2>
+      </motion.div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: 480, margin: '0 auto' }}>
+        {CARDS.map((card, i) => <MobileCard key={i} card={card} index={i} />)}
+      </div>
+    </div>
+  )
+}
 
 function TiltCard({ children, style }) {
   const ref = useRef(null)
@@ -93,6 +156,7 @@ const CARDS = [
 ]
 
 export default function About() {
+  const isMobile = useIsMobile()
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: containerRef })
   const sp = useSpring(scrollYProgress, { stiffness: 70, damping: 28, restDelta: 0.001 })
@@ -155,6 +219,8 @@ export default function About() {
     { x: c4X, y: c4Y, rotate: c4R, opacity: c4Op, scale: c4Sc },
     { x: c5X, y: c5Y, rotate: c5R, opacity: c5Op, scale: c5Sc },
   ]
+
+  if (isMobile) return <MobileAbout />
 
   return (
     <div ref={containerRef} id="about" style={{ height: '430vh', position: 'relative', zIndex: 20 }}>
