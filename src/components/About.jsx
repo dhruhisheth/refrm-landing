@@ -161,7 +161,7 @@ export default function About() {
   const { scrollYProgress } = useScroll({ target: containerRef })
   const sp = useSpring(scrollYProgress, { stiffness: 70, damping: 28, restDelta: 0.001 })
   // Clamp all card animations to first 65% of scroll — leaves 35% (~150vh) where all 6 cards stay visible
-  const animSp = useTransform(animSp, [0, 0.65], [0, 1])
+  const animSp = useTransform(sp, [0, 0.65], [0, 1])
 
   const titleOpacity = useTransform(animSp, [0.0, 0.06, 0.18, 0.24], [0, 1, 1, 0])
   const titleY = useTransform(animSp, [0.0, 0.06, 0.24], [28, 0, -26])
