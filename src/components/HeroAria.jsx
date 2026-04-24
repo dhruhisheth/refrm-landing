@@ -653,7 +653,7 @@ export default function HeroAria() {
               </motion.div>
             </div>
 
-            <div style={{ width: '100%', marginTop: '18px', display: isMobile ? 'none' : 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', marginTop: isMobile ? '12px' : '18px', display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: 'min(100%, 840px)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
                 {[
                   { value: '10+', label: 'discovery feeds' },
@@ -664,9 +664,9 @@ export default function HeroAria() {
                     key={item.label}
                     className="stat-shimmer"
                     style={{
-                      minHeight: '98px',
-                      padding: '14px 14px 12px',
-                      borderRadius: '20px',
+                      minHeight: isMobile ? '70px' : '98px',
+                      padding: isMobile ? '10px 10px 8px' : '14px 14px 12px',
+                      borderRadius: isMobile ? '14px' : '20px',
                       background: 'linear-gradient(180deg, rgba(8,10,16,0.84), rgba(20,18,22,0.70))',
                       border: '1px solid rgba(212,168,67,0.16)',
                       boxShadow: '0 16px 44px rgba(0,0,0,0.24)',
@@ -681,18 +681,18 @@ export default function HeroAria() {
                   >
                     <div style={{
                       fontFamily: '"Playfair Display", serif',
-                      fontSize: '24px',
+                      fontSize: isMobile ? '18px' : '24px',
                       color: '#f2e6d4',
                       lineHeight: 1,
-                      marginBottom: '6px',
+                      marginBottom: isMobile ? '4px' : '6px',
                     }}>
                       {item.value}
                     </div>
                     <div style={{
                       fontFamily: 'Inter, sans-serif',
-                      fontSize: '9px',
+                      fontSize: isMobile ? '7px' : '9px',
                       color: 'rgba(223,209,191,0.66)',
-                      letterSpacing: '0.14em',
+                      letterSpacing: '0.12em',
                       textTransform: 'uppercase',
                     }}>
                       {item.label}
