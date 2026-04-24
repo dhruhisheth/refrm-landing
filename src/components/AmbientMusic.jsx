@@ -13,13 +13,27 @@ export default function AmbientMusic() {
   const audioRef = useRef(null)
   const fadeRef  = useRef(null)
 
+  // Small hint appears only if user is still on page after 60s without music
   useEffect(() => {
-    const show = setTimeout(() => setShowHint(true), 3500)
-    const hide = setTimeout(() => setShowHint(false), 11000)
+    const show = setTimeout(() => setShowHint(true), 60000)
+    const hide = setTimeout(() => setShowHint(false), 75000)
     return () => { clearTimeout(show); clearTimeout(hide) }
   }, [])
 
   useEffect(() => { if (playing) setShowHint(false) }, [playing])
+
+  // Listen for play event dispatched by the MusicPrompt modal
+  useEffect(() => {
+    const handler = () => {
+      const audio = audioRef.current
+      if (!audio) return
+      audio.play()
+        .then(() => { fadeTo(TARGET_VOL); setPlaying(true); setShowHint(false) })
+        .catch(() => {})
+    }
+    document.addEventListener('refrm:play-music', handler)
+    return () => document.removeEventListener('refrm:play-music', handler)
+  }, [])
 
   useEffect(() => {
     const audio = new Audio(TRACK_URL)

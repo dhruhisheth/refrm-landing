@@ -8,6 +8,7 @@ import Contact from './components/Contact'
 import CursorSparkles from './components/CursorSparkles'
 import AmbientMusic from './components/AmbientMusic'
 import ScrollProgress from './components/ScrollProgress'
+import MusicPrompt from './components/MusicPrompt'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -50,6 +51,7 @@ export default function App() {
           />
           <Navbar />
           <AmbientMusic />
+          <MusicPrompt />
           <main style={{ position: 'relative', zIndex: 1 }}>
             <HeroAria />
             <About />
