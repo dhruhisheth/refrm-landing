@@ -16,10 +16,41 @@ export default function AmbientMusic() {
     const audio = new Audio(TRACK_URL)
     audio.loop = true
     audio.volume = 0
-    audio.preload = 'none'
+    audio.preload = 'auto'
     audioRef.current = audio
+
+    const fadeIn = () => {
+      let v = 0
+      const id = setInterval(() => {
+        v = Math.min(TARGET_VOL, v + 0.025)
+        audio.volume = v
+        if (v >= TARGET_VOL) clearInterval(id)
+      }, 35)
+    }
+
+    const tryPlay = () => {
+      if (!audio.paused) return
+      audio.play()
+        .then(() => { setPlaying(true); fadeIn() })
+        .catch(() => {})
+    }
+
+    // Try autoplay immediately
+    tryPlay()
+
+    // Fallback: start on first user gesture if autoplay is blocked
+    const onGesture = () => {
+      tryPlay()
+      document.removeEventListener('click', onGesture)
+      document.removeEventListener('touchstart', onGesture)
+    }
+    document.addEventListener('click', onGesture)
+    document.addEventListener('touchstart', onGesture)
+
     return () => {
       if (fadeRef.current) clearInterval(fadeRef.current)
+      document.removeEventListener('click', onGesture)
+      document.removeEventListener('touchstart', onGesture)
       audio.pause()
       audio.src = ''
     }
