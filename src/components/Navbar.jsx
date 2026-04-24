@@ -58,7 +58,7 @@ export default function Navbar() {
     if (id === '#hero-aria') {
       const rect = el.getBoundingClientRect()
       const totalScroll = Math.max(el.offsetHeight - window.innerHeight, 0)
-      const progress = stage === 'meet' ? 0.58 : 0
+      const progress = stage === 'meet' ? 0.55 : 0
       window.scrollTo({
         top: window.scrollY + rect.top + totalScroll * progress,
         behavior: 'smooth',

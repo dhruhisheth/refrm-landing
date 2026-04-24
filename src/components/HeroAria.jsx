@@ -131,21 +131,23 @@ export default function HeroAria() {
   const { scrollYProgress } = useScroll({ target: containerRef })
   const sp = useSpring(scrollYProgress, { stiffness: 80, damping: 28, restDelta: 0.001 })
 
-  const heroOpacity = useTransform(sp, [0, 0.22], [1, 0])
-  const heroY       = useTransform(sp, [0, 0.22], [0, -70])
-  const heroScale   = useTransform(sp, [0, 0.22], [1, 0.93])
-  const heroBlurPx  = useTransform(sp, [0, 0.20], [0, 12])
+  // Container is 500vh → 400vh of actual scroll distance
+  // Section 1 clears by 12% (48vh), Section 2 dwells 28%→82% = 216vh
+  const heroOpacity = useTransform(sp, [0, 0.12], [1, 0])
+  const heroY       = useTransform(sp, [0, 0.12], [0, -70])
+  const heroScale   = useTransform(sp, [0, 0.12], [1, 0.93])
+  const heroBlurPx  = useTransform(sp, [0, 0.10], [0, 12])
   const heroFilter  = useMotionTemplate`blur(${heroBlurPx}px)`
 
-  const textOpacity = useTransform(sp, [0.26, 0.50, 0.82, 0.98], [0, 1, 1, 0])
-  const textY       = useTransform(sp, [0.26, 0.50, 0.82, 0.98], [55, 0, 0, -50])
-  const textScale   = useTransform(sp, [0.26, 0.50, 0.82, 0.98], [0.96, 1, 1, 0.94])
+  const textOpacity = useTransform(sp, [0.14, 0.28, 0.82, 0.95], [0, 1, 1, 0])
+  const textY       = useTransform(sp, [0.14, 0.28, 0.82, 0.95], [55, 0, 0, -50])
+  const textScale   = useTransform(sp, [0.14, 0.28, 0.82, 0.95], [0.96, 1, 1, 0.94])
 
-  const imgOpacity  = useTransform(sp, [0.30, 0.54, 0.82, 0.98], [0, 1, 1, 0])
-  const imgY        = useTransform(sp, [0.30, 0.54, 0.82, 0.98], [120, 0, 0, -35])
-  const imgScale    = useTransform(sp, [0.30, 0.54, 0.82, 0.98], [0.92, 1, 1, 0.95])
+  const imgOpacity  = useTransform(sp, [0.18, 0.32, 0.82, 0.95], [0, 1, 1, 0])
+  const imgY        = useTransform(sp, [0.18, 0.32, 0.82, 0.95], [120, 0, 0, -35])
+  const imgScale    = useTransform(sp, [0.18, 0.32, 0.82, 0.95], [0.92, 1, 1, 0.95])
 
-  const exitBlurPx  = useTransform(sp, [0.82, 0.98], [0, 14])
+  const exitBlurPx  = useTransform(sp, [0.82, 0.95], [0, 14])
   const exitFilter  = useMotionTemplate`blur(${exitBlurPx}px)`
 
   // Suggestion cycle
@@ -205,7 +207,7 @@ export default function HeroAria() {
     const sectionTop = container.getBoundingClientRect().top
     const totalScroll = Math.max(container.offsetHeight - window.innerHeight, 0)
     window.scrollTo({
-      top: window.scrollY + sectionTop + totalScroll * 0.58,
+      top: window.scrollY + sectionTop + totalScroll * 0.55,
       behavior: 'smooth',
     })
   }
@@ -222,7 +224,7 @@ export default function HeroAria() {
   }
 
   return (
-    <div ref={containerRef} id="hero-aria" style={{ height: '320vh' }}>
+    <div ref={containerRef} id="hero-aria" style={{ height: '500vh' }}>
       <div
         onMouseMove={handleMouseMove}
         style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}
