@@ -17,17 +17,28 @@ export default function Contact() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const isMobile = useIsMobile()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`REFRM message from ${form.name}`)
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    )
-    window.location.href = `mailto:admin@refrm.in?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    setSending(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Failed')
+      setSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const baseInput = {
@@ -157,29 +168,39 @@ export default function Contact() {
                 style={{ ...baseInput, resize: 'none' }}
                 onFocus={focusInput} onBlur={blurInput}
               />
+              {error && (
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: '#b94040', marginBottom: '4px' }}>
+                  {error}
+                </p>
+              )}
               <motion.button
                 type="submit"
+                disabled={sending}
                 style={{
                   position: 'relative', overflow: 'hidden',
                   alignSelf: isMobile ? 'stretch' : 'flex-start',
                   padding: '14px 32px', textAlign: 'center',
-                  background: '#383838', color: '#E7F0CC', border: 'none',
+                  background: sending ? '#6a6a6a' : '#383838', color: '#E7F0CC', border: 'none',
                   fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: 600,
-                  letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer',
+                  letterSpacing: '0.15em', textTransform: 'uppercase',
+                  cursor: sending ? 'not-allowed' : 'pointer',
+                  opacity: sending ? 0.7 : 1,
                 }}
-                whileHover={{ background: '#4D5C60', scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={sending ? {} : { background: '#4D5C60', scale: 1.03 }}
+                whileTap={sending ? {} : { scale: 0.97 }}
               >
-                <motion.div
-                  style={{
-                    position: 'absolute', top: 0, bottom: 0, width: '40%',
-                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent)',
-                    pointerEvents: 'none',
-                  }}
-                  animate={{ left: ['-45%', '130%'] }}
-                  transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 1.8, ease: 'easeInOut' }}
-                />
-                Send Message
+                {!sending && (
+                  <motion.div
+                    style={{
+                      position: 'absolute', top: 0, bottom: 0, width: '40%',
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent)',
+                      pointerEvents: 'none',
+                    }}
+                    animate={{ left: ['-45%', '130%'] }}
+                    transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 1.8, ease: 'easeInOut' }}
+                  />
+                )}
+                {sending ? 'Sending…' : 'Send Message'}
               </motion.button>
             </motion.form>
           )}
