@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
-const TRACK_URL = 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/14/d5/61/14d561f3-00fe-e57c-8b5a-f2098ddbcdbb/mzaf_10148699690287543805.plus.aac.p.m4a'
-const TARGET_VOL = 0.55
+const TRACK_URL = '/audio/inspire.mp3'
+const TARGET_VOL = 0.05
 
 export default function AmbientMusic() {
   const [playing, setPlaying] = useState(false)

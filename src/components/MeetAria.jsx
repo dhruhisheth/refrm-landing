@@ -136,7 +136,7 @@ export default function MeetAria() {
           {/* Headline */}
           <motion.h2
             style={{
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Cormorant Garamond", serif',
               fontSize: 'clamp(36px, 4.5vw, 64px)',
               fontWeight: 400, color: '#f2ebe0',
               lineHeight: 1.1, letterSpacing: '-0.02em',

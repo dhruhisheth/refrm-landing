@@ -24,11 +24,11 @@ function MobileCard({ card, index }) {
       <div style={{ position: 'absolute', top: 0, right: 0, width: '50%', height: '35%', background: 'linear-gradient(220deg, rgba(232,218,196,0.05) 0%, transparent 65%)', pointerEvents: 'none' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
         <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '7.5px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(232,218,196,0.78)' }}>{card.tag}</span>
-        <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '10px', color: 'rgba(232,218,196,0.26)' }}>{card.num}</span>
+        <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '10px', color: 'rgba(232,218,196,0.26)' }}>{card.num}</span>
       </div>
       <div style={{ height: 1, background: 'linear-gradient(to right, rgba(232,218,196,0.13), transparent)', marginBottom: '14px' }} />
-      <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '20px', fontWeight: 400, color: '#f0e8d8', lineHeight: 1.22, letterSpacing: '-0.015em', margin: '0 0 6px 0', whiteSpace: 'pre-line' }}>{card.headline}</h3>
-      <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '11.5px', fontStyle: 'italic', color: 'rgba(232,218,196,0.78)', opacity: 0.88 }}>{card.sub}</span>
+      <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '20px', fontWeight: 400, color: '#f0e8d8', lineHeight: 1.22, letterSpacing: '-0.015em', margin: '0 0 6px 0', whiteSpace: 'pre-line' }}>{card.headline}</h3>
+      <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '11.5px', fontStyle: 'italic', color: 'rgba(232,218,196,0.78)', opacity: 0.88 }}>{card.sub}</span>
       <div style={{ height: 1, background: 'rgba(232,218,196,0.1)', margin: '12px 0' }} />
       <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', fontWeight: 400, color: 'rgba(215,200,175,0.65)', lineHeight: 1.72, margin: 0 }}>{card.body}</p>
       <div style={{ marginTop: '12px', height: '1.5px', borderRadius: '2px', background: 'linear-gradient(90deg, rgba(232,218,196,0.26), transparent)' }} />
@@ -53,7 +53,7 @@ function MobileAbout() {
           <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(212,168,67,0.55)' }} />
           <div style={{ height: 1, width: 36, background: 'rgba(212,168,67,0.28)' }} />
         </div>
-        <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 400, color: '#f2ebe0', lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0, textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}>
+        <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 400, color: '#f2ebe0', lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0, textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}>
           The Story of REFRM
         </h2>
       </motion.div>
@@ -251,7 +251,7 @@ export default function About() {
               <div style={{ height: 1, width: 36, background: 'rgba(212,168,67,0.28)' }} />
             </div>
             <h2 style={{
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Cormorant Garamond", serif',
               fontSize: 'clamp(38px, 5vw, 74px)',
               fontWeight: 400,
               color: '#f2ebe0',
@@ -344,7 +344,7 @@ export default function About() {
                       color: ACCENT.tag,
                     }}>{card.tag}</span>
                     <span style={{
-                      fontFamily: '"Playfair Display", serif', fontSize: '10px',
+                      fontFamily: '"Cormorant Garamond", serif', fontSize: '10px',
                       color: ACCENT.num, letterSpacing: '0.04em',
                     }}>{card.num}</span>
                   </div>
@@ -359,14 +359,14 @@ export default function About() {
                   {/* Headline */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
                     <h3 style={{
-                      fontFamily: '"Playfair Display", serif',
+                      fontFamily: '"Cormorant Garamond", serif',
                       fontSize: '20px', fontWeight: 400, color: '#f0e8d8',
                       lineHeight: 1.22, letterSpacing: '-0.015em',
                       margin: '0 0 8px 0', whiteSpace: 'pre-line',
                       textShadow: '0 1px 8px rgba(0,0,0,0.6)',
                     }}>{card.headline}</h3>
                     <span style={{
-                      fontFamily: '"Playfair Display", serif',
+                      fontFamily: '"Cormorant Garamond", serif',
                       fontSize: '11.5px', fontStyle: 'italic',
                       color: ACCENT.tag, opacity: 0.88,
                     }}>{card.sub}</span>

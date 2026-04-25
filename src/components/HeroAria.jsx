@@ -344,7 +344,7 @@ export default function HeroAria() {
                       <motion.h1
                         key="en"
                         style={{
-                          fontFamily: '"Playfair Display", serif',
+                          fontFamily: '"Cormorant Garamond", serif',
                           fontSize: 'clamp(50px, 6.5vw, 92px)',
                           fontWeight: 400, color: '#f5efe4',
                           lineHeight: 1.06, letterSpacing: '-0.025em',
@@ -372,7 +372,7 @@ export default function HeroAria() {
                         transition={{ duration: 0.15 }}
                       >
                         <div style={{
-                          fontFamily: '"Playfair Display", Georgia, "Noto Serif", serif',
+                          fontFamily: '"Cormorant Garamond", Georgia, "Noto Serif", serif',
                           fontSize: 'clamp(50px, 6.5vw, 92px)',
                           fontWeight: 400, color: '#f5efe4',
                           lineHeight: 1.06,
@@ -497,7 +497,7 @@ export default function HeroAria() {
                   }} />
                   <h2 style={{
                     position: 'relative', zIndex: 1,
-                    fontFamily: '"Playfair Display", serif',
+                    fontFamily: '"Cormorant Garamond", serif',
                     fontSize: isMobile ? 'clamp(28px, 6vw, 68px)' : 'clamp(40px, 4.8vw, 68px)',
                     fontWeight: 400, color: '#f5efe4',
                     lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0,
@@ -682,7 +682,7 @@ export default function HeroAria() {
                     }}
                   >
                     <div style={{
-                      fontFamily: '"Playfair Display", serif',
+                      fontFamily: '"Cormorant Garamond", serif',
                       fontSize: isMobile ? '18px' : '24px',
                       color: '#f2e6d4',
                       lineHeight: 1,

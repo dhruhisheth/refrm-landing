@@ -68,7 +68,7 @@ export default function Contact() {
       <div style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: '"Cormorant Garamond", serif',
         fontSize: 'clamp(80px, 20vw, 260px)',
         fontWeight: 500, letterSpacing: '-0.04em',
         color: 'rgba(56,56,56,0.038)',
@@ -105,7 +105,7 @@ export default function Contact() {
         <div style={{ maxWidth: 580, margin: '0 auto' }}>
 
           <motion.h2
-            style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(40px, 5vw, 72px)', fontWeight: 400, color: '#383838', lineHeight: 1.1, letterSpacing: '-0.01em', marginBottom: '16px', textAlign: 'center' }}
+            style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(40px, 5vw, 72px)', fontWeight: 400, color: '#383838', lineHeight: 1.1, letterSpacing: '-0.01em', marginBottom: '16px', textAlign: 'center' }}
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
@@ -128,7 +128,7 @@ export default function Contact() {
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              <p style={{ fontFamily: '"Playfair Display", serif', fontSize: '28px', color: '#383838', marginBottom: '10px' }}>Thank you.</p>
+              <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '28px', color: '#383838', marginBottom: '10px' }}>Thank you.</p>
               <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#525266' }}>ARIA will be in touch soon.</p>
             </motion.div>
           ) : (
@@ -197,7 +197,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '22px', fontWeight: 400, color: '#383838', letterSpacing: '0.02em' }}>REFRM</span>
+            <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '22px', fontWeight: 400, color: '#383838', letterSpacing: '0.02em' }}>REFRM</span>
             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', color: '#525266', letterSpacing: '0.12em' }}>Reform with AI</span>
           </div>
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', color: 'rgba(56,56,56,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>

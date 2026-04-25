@@ -28,7 +28,7 @@ export default function LoadingScreen({ onDone }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          fontFamily: '"Playfair Display", serif',
+          fontFamily: '"Cormorant Garamond", serif',
           fontSize: '13px',
           letterSpacing: '0.42em',
           fontWeight: 400,

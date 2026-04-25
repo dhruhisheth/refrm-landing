@@ -14,7 +14,7 @@ function RMark() {
     <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
       <span
         style={{
-          fontFamily: '"Playfair Display", serif',
+          fontFamily: '"Cormorant Garamond", serif',
           fontSize: '28px',
           fontWeight: 500,
           color: '#e8ddd0',
@@ -235,7 +235,7 @@ export default function Navbar() {
                 right: '8%',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                fontFamily: '"Playfair Display", serif',
+                fontFamily: '"Cormorant Garamond", serif',
                 fontSize: '28vw',
                 fontWeight: 500,
                 color: 'rgba(232,221,208,0.03)',
@@ -256,7 +256,7 @@ export default function Navbar() {
                     background: 'none',
                     border: 'none',
                     textAlign: 'left',
-                    fontFamily: '"Playfair Display", serif',
+                    fontFamily: '"Cormorant Garamond", serif',
                     fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
                     fontWeight: 400,
                     color: '#e8ddd0',
@@ -288,7 +288,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <span style={{ fontFamily: '"Playfair Display", serif', fontSize: '13px', color: 'rgba(200,185,165,0.35)', letterSpacing: '0.05em' }}>
+              <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '13px', color: 'rgba(200,185,165,0.35)', letterSpacing: '0.05em' }}>
                 Reform with AI
               </span>
               <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', color: 'rgba(200,185,165,0.2)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>

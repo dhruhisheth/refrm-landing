@@ -268,7 +268,7 @@ export default function Hero() {
           {/* Main headline */}
           <motion.h1
             style={{
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Cormorant Garamond", serif',
               fontSize: 'clamp(50px, 6.5vw, 92px)',
               fontWeight: 400,
               color: '#f5efe4',

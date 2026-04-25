@@ -73,7 +73,7 @@ export default function MusicPrompt() {
             </motion.div>
 
             <h3 style={{
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Cormorant Garamond", serif',
               fontSize: '26px', fontWeight: 400,
               color: '#f2ebe0', margin: '0 0 10px 0',
               letterSpacing: '-0.01em', lineHeight: 1.1,
