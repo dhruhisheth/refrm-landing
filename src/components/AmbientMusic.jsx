@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 const TRACK_URL = '/audio/inspire.mp3'
-const TARGET_VOL = 0.05
+const TARGET_VOL = 0.03
 
-export default function AmbientMusic() {
+export default function AmbientMusic({ hidden = false }) {
   const [playing, setPlaying] = useState(false)
   const [tooltip, setTooltip] = useState(false)
   const [showHint, setShowHint] = useState(false)
@@ -41,23 +41,6 @@ export default function AmbientMusic() {
     audio.volume = 0
     audio.preload = 'auto'
     audioRef.current = audio
-
-    // Try real (unmuted) autoplay first — works in some browsers
-    audio.volume = 0
-    audio.play()
-      .then(() => {
-        setPlaying(true)
-        let v = 0
-        const id = setInterval(() => {
-          v = Math.min(TARGET_VOL, v + 0.018)
-          audio.volume = v
-          if (v >= TARGET_VOL) clearInterval(id)
-        }, 40)
-      })
-      .catch(() => {
-        // Autoplay blocked — button pulses to invite the first click
-        // Music will start on the user's first interaction with the button
-      })
 
     return () => {
       if (fadeRef.current) clearInterval(fadeRef.current)
@@ -102,6 +85,8 @@ export default function AmbientMusic() {
         .catch(e => console.warn('Audio blocked:', e))
     }
   }
+
+  if (hidden) return null
 
   return (
     <div style={{ position: 'fixed', bottom: 28, ...(isMobile ? { left: 16 } : { right: 28 }), zIndex: 200 }}>

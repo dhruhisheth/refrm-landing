@@ -22,6 +22,8 @@ export default function App() {
     <>
       <ScrollProgress />
       <CursorSparkles />
+      <AmbientMusic hidden={loading} />
+      <MusicPrompt />
 
       <AnimatePresence mode="wait">
         {loading && <LoadingScreen key="loading" onDone={() => setLoading(false)} />}
@@ -50,8 +52,6 @@ export default function App() {
             }}
           />
           <Navbar />
-          <AmbientMusic />
-          <MusicPrompt />
           <main style={{ position: 'relative', zIndex: 1 }}>
             <HeroAria />
             <About />
