@@ -87,8 +87,15 @@ export default function AmbientMusic() {
     if (!audio) return
 
     if (playing) {
-      fadeTo(0, () => audio.pause())
       setPlaying(false)
+      if (isMobile) {
+        // iOS doesn't support setting audio.volume programmatically,
+        // so the fade loop never finishes — pause directly instead
+        if (fadeRef.current) clearInterval(fadeRef.current)
+        audio.pause()
+      } else {
+        fadeTo(0, () => audio.pause())
+      }
     } else {
       audio.play()
         .then(() => { fadeTo(TARGET_VOL); setPlaying(true) })
