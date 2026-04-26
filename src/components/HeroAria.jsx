@@ -498,7 +498,7 @@ export default function HeroAria() {
                   <h2 style={{
                     position: 'relative', zIndex: 1,
                     fontFamily: '"Cormorant Garamond", serif',
-                    fontSize: isMobile ? 'clamp(18px, 4.5vw, 28px)' : 'clamp(20px, 2.2vw, 32px)',
+                    fontSize: isMobile ? 'clamp(22px, 5vw, 34px)' : 'clamp(28px, 3.2vw, 48px)',
                     fontWeight: 400, color: '#f5efe4',
                     lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0,
                     textShadow: '0 2px 18px rgba(0,0,0,1), 0 10px 50px rgba(0,0,0,0.95)',
