@@ -475,7 +475,7 @@ export default function HeroAria() {
         <motion.div id="meet-aria" style={{
           position: 'absolute', inset: 0, zIndex: 24,
           display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center',
-          paddingTop: isMobile ? '72px' : 'clamp(40px, 6vh, 80px)',
+          paddingTop: isMobile ? '160px' : 'clamp(40px, 6vh, 80px)',
           pointerEvents: 'none',
           filter: exitFilter,
         }}>
