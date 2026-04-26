@@ -228,7 +228,7 @@ export default function Contact() {
             {[
               { label: 'Instagram', href: 'https://www.instagram.com/refrm.in/?hl=en' },
               { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/admin-undefined-048061404/' },
-              { label: 'Email',     href: 'mailto:admin@refrm.in' },
+              { label: 'Email',     href: 'mailto:admin.refrm@gmail.com' },
             ].map((item) => (
               <a
                 key={item.label}

@@ -156,7 +156,7 @@ export default function Navbar() {
           />
 
           <motion.button
-            onClick={() => window.location.href = 'mailto:admin@refrm.in'}
+            onClick={() => window.location.href = 'mailto:admin.refrm@gmail.com'}
             style={{
               position: 'relative',
               overflow: 'hidden',
