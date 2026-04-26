@@ -487,8 +487,8 @@ export default function HeroAria() {
             opacity: textOpacity, y: textY, scale: textScale,
           }}>
 
-            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1.2fr) minmax(300px, 0.8fr)', gap: isMobile ? '24px' : '40px', width: '100%', alignItems: 'start' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '680px', margin: '0 auto' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', alignItems: 'center', textAlign: 'center' }}>
                 <div style={{ position: 'relative' }}>
                   <div style={{
                     position: 'absolute', inset: '-26px -40px',
