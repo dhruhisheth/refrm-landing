@@ -124,7 +124,7 @@ export default function MeetAria() {
         position: 'relative', zIndex: 10,
         width: '100%', minHeight: '100vh',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        gridTemplateColumns: '1fr',
         gap: 'clamp(40px, 6vw, 100px)',
         alignItems: 'center',
         padding: 'clamp(100px, 12vh, 160px) clamp(40px, 8vw, 120px) clamp(80px, 10vh, 120px)',
@@ -262,67 +262,6 @@ export default function MeetAria() {
           </motion.div>
         </motion.div>
 
-        {/* ── RIGHT: ARIA rises from below ── */}
-        <motion.div
-          ref={ariaRef}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', y: ariaY, opacity: scrollOpacity }}
-        >
-          <div style={{ position: 'relative', display: 'inline-block' }}>
-            {/* Ground shadow */}
-            <div style={{
-              position: 'absolute', bottom: -8, left: '50%', transform: 'translateX(-50%)',
-              width: 140, height: 18, borderRadius: '50%',
-              background: 'rgba(212,168,67,0.12)', filter: 'blur(12px)',
-            }} />
-
-            {/* Floating animation wrapper */}
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <img
-                src="/images/aria3_hi-removebg-preview.png"
-                alt="ARIA"
-                style={{
-                  width: 'clamp(200px, 24vw, 320px)',
-                  height: 'auto', objectFit: 'contain',
-                  display: 'block', position: 'relative', zIndex: 1,
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))',
-                }}
-              />
-            </motion.div>
-          </div>
-
-          {/* Speech bubble */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={ariaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={bubble}
-                style={{
-                  padding: '12px 20px',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(212,168,67,0.2)',
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                  fontFamily: 'Inter, sans-serif', fontSize: '13px',
-                  color: 'rgba(230,215,190,0.88)',
-                  whiteSpace: 'nowrap', textAlign: 'center',
-                  letterSpacing: '0.01em',
-                }}
-                initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.28 }}
-              >
-                {bubble}
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        </motion.div>
 
       </div>
     </section>
