@@ -604,55 +604,6 @@ export default function HeroAria() {
 
               </div>
 
-              <motion.div style={{ opacity: imgOpacity, y: imgY, scale: imgScale, flexShrink: 0, alignSelf: 'start', paddingTop: isMobile ? '0' : '110px' }}>
-                <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <motion.div
-                    style={{
-                      position: 'absolute',
-                      inset: '-16px -24px -6px',
-                      borderRadius: '34px',
-                      background: 'linear-gradient(180deg, rgba(10,12,18,0.80), rgba(18,20,24,0.56))',
-                      border: '1px solid rgba(212,168,67,0.18)',
-                      backdropFilter: 'blur(14px)',
-                      WebkitBackdropFilter: 'blur(14px)',
-                    }}
-                    animate={{
-                      boxShadow: cursorNearAria
-                        ? '0 22px 70px rgba(0,0,0,0.34), 0 0 42px rgba(212,168,67,0.16)'
-                        : '0 20px 60px rgba(0,0,0,0.28)',
-                    }}
-                    transition={{ duration: 0.45 }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: '8% 14% 12%',
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(212,168,67,0.20) 0%, rgba(212,168,67,0.10) 34%, rgba(212,168,67,0.04) 58%, transparent 76%)',
-                      filter: 'blur(24px)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                  <div style={{
-                    position: 'absolute', bottom: -8, left: '50%', transform: 'translateX(-50%)',
-                    width: 140, height: 16, borderRadius: '50%', filter: 'blur(14px)',
-                    background: 'rgba(212,168,67,0.2)',
-                  }} />
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                    <img
-                      src="/images/aria3_hi-removebg-preview.png"
-                      alt="ARIA"
-                      style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        height: isMobile ? 'clamp(130px, 20vh, 200px)' : 'clamp(280px, 38vh, 380px)',
-                        width: 'auto', objectFit: 'contain', display: 'block',
-                        filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
-                      }}
-                    />
-                  </div>
-                </div>
-              </motion.div>
             </div>
 
             <div style={{ width: '100%', marginTop: isMobile ? '12px' : '18px', display: 'flex', justifyContent: 'center' }}>
