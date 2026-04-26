@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'REFRM <admin@refrm.in>',
+      from: 'REFRM <onboarding@resend.dev>',
       to: 'admin@refrm.in',
       replyTo: email,
       subject: `Message from ${name}`,
