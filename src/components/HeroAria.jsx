@@ -502,6 +502,7 @@ export default function HeroAria() {
                     fontWeight: 400, color: '#f5efe4',
                     lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0,
                     textShadow: '0 2px 18px rgba(0,0,0,1), 0 10px 50px rgba(0,0,0,0.95)',
+                    textAlign: 'center',
                   }}>
                     Tell{' '}
                     <span style={{
