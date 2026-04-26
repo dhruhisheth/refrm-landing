@@ -27,12 +27,19 @@ export default function Contact() {
     setSending(true)
     setError(null)
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          access_key: '36aaba5b-ba36-426e-9449-a2171e8cb55f',
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          subject: `Message from ${form.name} via REFRM`,
+        }),
       })
-      if (!res.ok) throw new Error('Failed')
+      const data = await res.json()
+      if (!data.success) throw new Error('Failed')
       setSubmitted(true)
     } catch {
       setError('Something went wrong. Please try again.')
